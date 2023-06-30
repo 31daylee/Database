@@ -216,7 +216,7 @@ UPDATE `Register` SET
 
 
 
-#문제9
+#문제9 수강신청 
 SELECT `regTotal` FROM `Register` ORDER BY `regTotal` DESC LIMIT 1;
 
 

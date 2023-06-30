@@ -143,7 +143,7 @@ SELECT
 	`doc_name`,
 	`chart_contents`,
 	`treat_contents`,
-	`treate_datetime`
+	`treat_datetime`
 FROM `Charts`  AS a 
 JOIN `Doctors` AS b on a.doc_id = b.doc_id
 JOIN `Treatments` AS c ON a.treat_no = c.treat_no
@@ -153,18 +153,18 @@ JOIN `Patients` AS d ON a.pat_id = d.pat_id;
 
 #문제5 모든 진료내역에서 '외과'에서 진료한 내역 가운데 진료번호,환자이름,담당의사명,진료내용을 조회하시오
 SELECT 
-	c.`treat_no`,
-	d.`pat_name`,
-	b.`doc_name`,
-	a.`chart_contents`,
-	c.`treat_contents`,
-	c.`treate_datetime`
-FROM `Charts`  AS a 
-JOIN `Doctors` AS b on a.doc_id = b.doc_id
-JOIN `Treatments` AS c ON a.treat_no = c.treat_no
-JOIN `Patients` AS d ON a.pat_id = d.pat_id
-JOIN `Departments` AS e ON b.dep_no = e.dep_no
-WHERE e.`dep_name`= '외과';
+	a.`treat_no`,
+	`pat_name`,
+	`doc_name`,
+	`treat_contents`,
+	`chart_contents`,
+	`treat_datetime`
+FROM `Treatments`  AS a
+JOIN `Doctors`     AS b ON a.doc_id = b.doc_id
+JOIN `Departments` AS c ON b.dep_no = c.dep_no
+JOIN `Charts`      AS d ON a.treat_no = d.treat_no
+JOIN `Patients`    AS e ON a.pat_id = e.pat_id
+WHERE `dep_name`='외과';
 
 
 
@@ -172,19 +172,18 @@ WHERE e.`dep_name`= '외과';
 
 #문제6 모든 진료내역에서 '화상'으로 진료한 내역 가운데 진료번호,환자이름,담당의사명,진료내용을 조회하시오
 SELECT 
-	c.`treat_no`,
-	d.`pat_name`,
-	b.`doc_name`,
-	a.`chart_contents`,
-	c.`treat_contents`,
-	c.`treate_datetime`
-FROM `Charts`  AS a 
-JOIN `Doctors` AS b on a.doc_id = b.doc_id
-JOIN `Treatments` AS c ON c.doc_id =b.doc_id
-JOIN `Patients` AS d ON a.pat_id = d.pat_id
-WHERE c.treat_contents LIKE '%화상%';
-
-
+	a.`treat_no`,
+	`pat_name`,
+	`doc_name`,
+	`treat_contents`,
+	`chart_contents`,
+	`treat_datetime`
+FROM `Treatments`  AS a
+JOIN `Doctors`     AS b ON a.doc_id = b.doc_id
+JOIN `Departments` AS c ON b.dep_no = c.dep_no
+JOIN `Charts`      AS d ON a.treat_no = d.treat_no
+JOIN `Patients`    AS e ON a.pat_id = e.pat_id
+WHERE a.`treat_contents` LIKE '%화상%';
 
 
 #문제7 현재 날짜를 기준으로 30세 이상 ~ 40세 미만 환자를 조회하시오
