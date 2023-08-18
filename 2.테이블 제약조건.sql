@@ -53,7 +53,7 @@ CREATE TABLE `Parent` (
 
 CREATE TABLE `Child` (
 `cid` 	VARCHAR(10) PRIMARY KEY,
-`name` 	VARCHAR(10),
+`name` 	VARCHAR(10),farmstory
 `hp` 		CHAR(13) UNIQUE,
 `pid`		VARCHAR(10),
 FOREIGN KEY(`pid`) REFERENCES `Parent` (`pid`)

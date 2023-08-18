@@ -63,7 +63,7 @@ CREATE TABLE `Product`(
 	`cate`		TINYINT NOT NULL,
 	`pName`		VARCHAR(100) NOT NULL,	
 	`price`		INT DEFAULT 0,
-	`delivery`	INT DEFAULT 0,farmstory
+	`delivery`	INT DEFAULT 0,
 	`stock`		INT DEFAULT 0,
 	`sold`		INT DEFAULT 0,
 	`thumb1`		VARCHAR(255) NOT NULL,
@@ -91,11 +91,12 @@ CREATE TABLE `Order`(
 
 
 
+INSERT INTO `Article`(`cate`,`title`,`writer`,`content`,`regip`,`rdate`)
+SELECT `cate`,`title`,`writer`,`content`,`regip`,`rdate` FROM `Article`;
 
 
-
-
-
+# 최신글 조회하기
+SELECT `no`,`title`,`rdate` FROM `Article` WHERE `cate`='grow' Order BY `no` DESC LIMIT 5;
 
 
 
