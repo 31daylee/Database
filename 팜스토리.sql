@@ -90,7 +90,7 @@ CREATE TABLE `Order`(
 );
 
 
-
+# 게시글 채우기
 INSERT INTO `Article`(`cate`,`title`,`writer`,`content`,`regip`,`rdate`)
 SELECT `cate`,`title`,`writer`,`content`,`regip`,`rdate` FROM `Article`;
 
@@ -128,4 +128,40 @@ FROM `Product` AS a
 JOIN `Order` AS b ON a.pNo = b.orderProduct
 JOIN `User` AS c ON b.orderUser = c.uid
 WHERE b.orderNo=3;
-member
+MEMBER
+
+
+
+#댓글 총 개수 
+SELECT
+	a.*, 
+	b.nick,
+	(SELECT COUNT(*) FROM Article c WHERE c.parent= a.no)
+FROM Article AS a 
+JOIN User AS b 
+ON a.writer = b.uid 
+where parent = 0;
+
+#파일 삭제 선택
+DELETE FROM `File` WHERE `ano`=364;
+
+
+
+#mydb
+ALTER TABLE `USER` RENAME TO `User1`;
+
+
+
+
+
+
+SELECT 
+a.*,
+b.pName,
+b.thumb1 
+FROM `Order` AS a
+JOIN `Product` AS b 
+ON a.orderProduct = b.pNo
+LIMIT 1, 10;
+
+
