@@ -73,3 +73,19 @@ SELECT COUNT(*) FROM `Article`;
 
 DELETE FROM `Article`; 
 
+
+#컬럼명 변경
+ALTER TABLE `File` CHANGE COLUMN oName ofile VARCHAR(255);
+ALTER TABLE `File` CHANGE COLUMN newName sfile VARCHAR(255);
+
+#파일 첨부한 아티클 조회
+SELECT * FROM `Article` AS a
+LEFT JOIN `File` AS b
+ON a.`no` = b.ano
+WHERE `no`=14;
+
+
+SELECT COUNT(*) FROM `Article` WHERE `parent`=0 AND `title` LIKE '%파일%';
+
+#현재시간 확인 
+SELECT NOW();

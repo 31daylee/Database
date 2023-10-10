@@ -99,4 +99,33 @@ SELECT `cate`,`title`,`writer`,`content`,`regip`,`rdate` FROM `Article`;
 SELECT `no`,`title`,`rdate` FROM `Article` WHERE `cate`='grow' Order BY `no` DESC LIMIT 5;
 
 
+# 상품 채우기
+INSERT INTO `Product`(`type`,`pName`,`price`,`delivery`,`stock`,`thumb1`,`thumb2`,`thumb3`,`seller`,`rdate`)
+SELECT `type`,`pName`,`price`,`delivery`,`stock`,`thumb1`,`thumb2`,`thumb3`,`seller`,`rdate` FROM `Product`;
 
+ALTER TABLE `Order` ADD COLUMN `orderEtc` VARCHAR(255) AFTER `orderTotal`;
+
+ALTER TABLE `Order` ADD COLUMN `receiver` VARCHAR(255) AFTER `orderTotal`;
+ALTER TABLE `Order` ADD COLUMN `hp` VARCHAR(255) AFTER `receiver`;
+ALTER TABLE `Order` ADD COLUMN `zip` VARCHAR(255) AFTER `hp`;
+ALTER TABLE `Order` ADD COLUMN `addr1` VARCHAR(255) AFTER `zip`;
+ALTER TABLE `Order` ADD COLUMN `addr2` VARCHAR(255) AFTER `addr1`;
+
+# 주문 채우기
+INSERT INTO `Order`(`orderProduct`,`orderCount`,`orderDelivery`,`orderPrice`,`orderTotal`,`receiver`,`hp`,`zip`,`addr1`,`addr2`,`orderEtc`,`orderUser`,`orderDate`)
+SELECT `orderProduct`,`orderCount`,`orderDelivery`,`orderPrice`,`orderTotal`,`receiver`,`hp`,`zip`,`addr1`,`addr2`,`orderEtc`,`orderUser`,`orderDate` FROM `Order`;
+
+#관리자_주문내역_상세주문내역
+SELECT 
+	a.pNo,
+	a.pName,
+	a.price,
+	b.orderCount,
+	a.delivery,
+	b.orderTotal,
+	c.name 
+FROM `Product` AS a
+JOIN `Order` AS b ON a.pNo = b.orderProduct
+JOIN `User` AS c ON b.orderUser = c.uid
+WHERE b.orderNo=3;
+member
