@@ -89,3 +89,10 @@ SELECT COUNT(*) FROM `Article` WHERE `parent`=0 AND `title` LIKE '%파일%';
 
 #현재시간 확인 
 SELECT NOW();
+
+
+DELETE FROM `cs_board` WHERE `bno` BETWEEN 2000 AND 2300;
+
+#게시물채우기
+INSERT INTO `cs_board`(`uid`,`group`,`cate`,`type`,`title`, `content`,`file`,`status`, `rdate`) 
+SELECT `uid`,`group`,`cate`,`type`,`title`, `content`,`file`,`status`, `rdate` FROM `cs_board`;
